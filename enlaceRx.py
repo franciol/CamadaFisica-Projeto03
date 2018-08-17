@@ -9,6 +9,8 @@
 
 # Importa pacote de tempo
 import time
+import facadeEnlace
+
 
 # Threads
 import threading
