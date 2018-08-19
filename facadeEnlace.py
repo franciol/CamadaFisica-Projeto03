@@ -33,20 +33,6 @@ def encapsulate(imgPayload):
     imgPayload.save(imgByteArr, format='JPEG')
     imgByteArr = imgByteArr.getvalue()
     txLen = len(imgByteArr)
-
-
-
-    bytearray = 
-
-    for i in range(0,txLen):
-        if imgByteArr[i] == EOP[0]:
-            if imgByteArr[i+1] == EOP[1]:
-                if imgByteArr[i+2] == EOP[2]:
-                    if imgByteArr[i+3] == EOP[3]:
-                        imgByteArr[i-1].append(stuffingByte)
-
-    imgByteArr+=EOP
-
     '''
         Head = 10 bytes:
             payloadLen = 5 bytes
@@ -55,17 +41,31 @@ def encapsulate(imgPayload):
     '''
     payloadLen = int_to_byte(txLen,5)
     head = bytes(payloadLen)+EOP+stuffingByte
-    all = head,imgByteArr,EOP
-    print(head)
+    all = bytes()
+    all += head
+    all += imgByteArr
+    all += EOP
+    print("\n Head len:  ",len(head))
+    return all
 
-    #return all
+def readHeadNAll(receivedAll):
+    head = receivedAll[0:21]
+    print("headLen:  ",head[0:5])
+    txLen = fromByteToInt(head[0:5])
+    eopSystem = head[5:18]
+    stuffByte = head[17:21]
+    return txLen, eopSystem, stuffByte
+
 
 
 def teste():
     img = Image.open('circuit.jpg', mode='r')
     testeSubject = encapsulate(img)
     #print(testeSubject)
+    txLenRead, eopSystem, stufg = readHeadNAll(testeSubject)
+
+    print("\n Reading TxLen:     ",txLenRead )
+    print("\n Reading eopSystem: ", eopSystem)
+    print("\n Reading Stuffing:  ", stufg)
 
 teste()
-
-print(fromByteToInt(b'\x00\x00\x00\x11\xdc'))
