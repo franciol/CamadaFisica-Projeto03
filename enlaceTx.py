@@ -78,6 +78,7 @@ class TX(object):
     def getBufferLen(self):
         """ Return the total size of bytes in the TX buffer
         """
+        
         return(len(self.buffer))
 
     def getStatus(self):
@@ -85,10 +86,9 @@ class TX(object):
         """
         #print("O tamanho transmitido. Impressao fora do thread {}" .format(self.transLen))
         return(self.transLen)
-        
+
 
     def getIsBussy(self):
         """ Return true if a transmission is ongoing
         """
         return(self.threadMutex)
-

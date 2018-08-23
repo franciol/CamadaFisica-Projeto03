@@ -72,20 +72,13 @@ def main():
 
 
 
-    txLen    = len(imgByteArr)
-    infoArray = int_to_byte(txLen, 5)
-    print(len(infoArray))
 
     txBuffer = imgByteArr
-    print(txLen)
-    print(bytes(infoArray))
+
 
     # Transmite dado
     print("tentado transmitir .... {} bytes".format(txLen))
-    com.sendData(bytes(infoArray))
 
-    time.sleep(5)
-    print("Acordou")
     com.sendData(txBuffer)
 
 

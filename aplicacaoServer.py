@@ -70,10 +70,6 @@ def main():
     txBuffer = imgByteArr
     txLen2 = 20
     '''
-    txLen2, nRx2 = com.getData(5)
-    print(txLen2)
-    txLen = fromByteToInt(txLen2)
-
 
     '''
     print(txLen)
@@ -92,7 +88,7 @@ def main():
     bytesSeremLidos=com.rx.getBufferLen()
 
 
-    rxBuffer, nRx = com.getData(txLen)
+    rxBuffer, nRx = com.getData(bytesSeremLidos)
 
     # log
     print ("Lido              {} bytes ".format(nRx))

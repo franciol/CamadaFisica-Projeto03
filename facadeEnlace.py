@@ -26,31 +26,30 @@ def fromByteToInt(bytes):
     return result
 
 
-def encapsulate(imgPayload):
+def encapsulate(payload):
 
 
-    imgByteArr = io.BytesIO()
-    imgPayload.save(imgByteArr, format='JPEG')
-    imgByteArr = imgByteArr.getvalue()
-    txLen = len(imgByteArr)
+
+    txLen = len(payload)
+    print(txLen)
     '''
         Head = 10 bytes:
             payloadLen = 5 bytes
-            EOP = 4 bytes
-            stuffing = 1 byte
+            EOP = 13 bytes
+            stuffing = 3 bytes
     '''
     payloadLen = int_to_byte(txLen,5)
     head = bytes(payloadLen)+EOP+stuffingByte
     all = bytes()
     all += head
-    all += imgByteArr
+    all += payload
     all += EOP
     print("\n Head len:  ",len(head))
     return all
 
 def readHeadNAll(receivedAll):
     head = receivedAll[0:21]
-    print("headLen:  ",head[0:5])
+    print("head:  ",head[0:21])
     txLen = fromByteToInt(head[0:5])
     eopSystem = head[5:18]
     stuffByte = head[17:21]
@@ -61,11 +60,12 @@ def readHeadNAll(receivedAll):
 def teste():
     img = Image.open('circuit.jpg', mode='r')
     testeSubject = encapsulate(img)
-    #print(testeSubject)
+    print(testeSubject)
     txLenRead, eopSystem, stufg = readHeadNAll(testeSubject)
 
     print("\n Reading TxLen:     ",txLenRead )
     print("\n Reading eopSystem: ", eopSystem)
     print("\n Reading Stuffing:  ", stufg)
+
 
 teste()
