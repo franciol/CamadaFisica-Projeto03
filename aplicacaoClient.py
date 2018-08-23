@@ -37,9 +37,9 @@ import tkinter.filedialog as fdlg
 #   python -m serial.tools.list_ports
 # se estiver usando windows, o gerenciador de dispositivos informa a porta
 
-serialName = "/dev/ttyACM0"           # Ubuntu (variacao de)
+#serialName = "/dev/ttyACM0"           # Ubuntu (variacao de)
 #serialName = "/dev/cu.usbmodem1421" # Mac    (variacao de)
-#serialName = "COM5"                  # Windows(variacao de)
+serialName = "COM3"                  # Windows(variacao de)
 
 
 
@@ -74,7 +74,7 @@ def main():
 
 
     txBuffer = imgByteArr
-
+    txLen = len(imgByteArr)
 
     # Transmite dado
     print("tentado transmitir .... {} bytes".format(txLen))

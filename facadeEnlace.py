@@ -66,6 +66,3 @@ def teste():
     print("\n Reading TxLen:     ",txLenRead )
     print("\n Reading eopSystem: ", eopSystem)
     print("\n Reading Stuffing:  ", stufg)
-
-
-teste()

@@ -78,7 +78,6 @@ class TX(object):
     def getBufferLen(self):
         """ Return the total size of bytes in the TX buffer
         """
-        
         return(len(self.buffer))
 
     def getStatus(self):
