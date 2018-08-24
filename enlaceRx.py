@@ -75,17 +75,18 @@ class RX(object):
     def getBufferLen(self):
         """ Return the total number of bytes in the reception buffer
         """
-        lenGrow = 0
-        growing = True
+        lenGrow = -1
         print("len original:",len(self.buffer))
-        while len(self.buffer):
-            sleep(0.5)
-        while True:
-            if lenGrow < len(self.buffer):
-                lenGrow = len(self.buffer)
-                sleep(0.5)
-            else:
-                growing = False
+
+
+
+        while len(self.buffer) != lenGrow or len(self.buffer) == 0:
+            print("notReady")
+            lenGrow=len(self.buffer)
+            time.sleep(1)
+            print("Não está pronto")
+       
+            
         return(len(self.buffer))
 
     def getAllBuffer(self, len):
