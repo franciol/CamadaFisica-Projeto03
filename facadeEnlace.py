@@ -53,7 +53,7 @@ def readHeadNAll(receivedAll):
     
     txLen = fromByteToInt(head[0:5])
     
-    eopSystem = head[5:18]
+    eopSystem = head[5:17]
     print('END OF PACKAGE', eopSystem)
     stuffByte = head[17:21]
 
