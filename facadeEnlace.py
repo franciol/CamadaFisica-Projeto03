@@ -48,12 +48,13 @@ def encapsulate(payload):
     return all
 
 def readHeadNAll(receivedAll):
-    print('RECEIVEDALL TUDÃO: ', receivedAll)
+    
     head = receivedAll[0:21]
-    print("head:  ",head[0:21])
+    
     txLen = fromByteToInt(head[0:5])
-    print('txlen: ', txLen)
+    
     eopSystem = head[5:18]
+    print('END OF PACKAGE', eopSystem)
     stuffByte = head[17:21]
 
     sanityCheck = bytearray()
@@ -61,23 +62,16 @@ def readHeadNAll(receivedAll):
 
 
     
-    for i in range(22, len(receivedAll)):
-        print('receivedAll ',receivedAll[i])
-        if receivedAll[i] == stuffByte:
-            sanityCheck.append(receivedAll[i+1:i+13])
-            stuffByteCount += 1
-            i = i+13
-            continue
-
-        elif receivedAll[i:i+13] != eopSystem:
-            sanityCheck.append(receivedAll[i])
-
-        else:
-
+    for i in range(21, len(receivedAll)):
+        if eopSystem == receivedAll[i:i+13]:
+            print(receivedAll[i:i+13])
             break
 
+        else:
+            sanityCheck += receivedAll[i:i+1]
 
 
+    print('SanityCheck ', sanityCheck)
     if len(sanityCheck) == txLen:
         
         print ("sanityCheck = okay")
@@ -87,17 +81,6 @@ def readHeadNAll(receivedAll):
         print ("\n\n ERRO  \n\n HOUVE FALHA NA TRANSMISSÃO. FECHANDO APLICAÇÃO… TENTE NOVAMENTE.")
         quit()
 
-
-
-
-
-        
-
-
-
-
-
-    
 
 
 
