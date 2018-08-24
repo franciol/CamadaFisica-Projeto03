@@ -39,7 +39,7 @@ import tkinter.filedialog as fdlg
 
 #serialName = "/dev/ttyACM0"           # Ubuntu (variacao de)
 #serialName = "/dev/cu.usbmodem1421" # Mac    (variacao de)
-serialName = "COM3"                  # Windows(variacao de)
+serialName = "COM7"                  # Windows(variacao de)
 
 
 

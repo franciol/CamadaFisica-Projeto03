@@ -54,7 +54,7 @@ class enlace(object):
     def sendData(self, data):
         """ Send data over the enlace interface
         """
-        dataEncap = encapsulate(data)
+        dataEncap = facadeEnlace.encapsulate(data)
         self.tx.sendBuffer(dataEncap)
 
     def getData(self, size):
